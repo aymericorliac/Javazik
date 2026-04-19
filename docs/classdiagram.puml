@@ -1,0 +1,68 @@
+@startuml
+package javazik.model {
+  interface Descriptible
+  interface Playable
+
+  abstract class EntiteArtistique {
+    -id : String
+    -nom : String
+    -pays : String
+  }
+
+  class Artiste
+  class Groupe
+  EntiteArtistique <|-- Artiste
+  EntiteArtistique <|-- Groupe
+  Groupe "0..*" -- "0..*" Artiste : membres
+
+  class Album {
+    -titre : String
+    -annee : int
+  }
+
+  class Morceau {
+    -titre : String
+    -dureeSecondes : int
+    -genre : Genre
+    -annee : int
+    -nombreEcoutes : int
+    -nombreAjoutsPlaylists : int
+  }
+
+  Morceau ..|> Descriptible
+  Morceau ..|> Playable
+  Album ..|> Descriptible
+  EntiteArtistique ..|> Descriptible
+
+  EntiteArtistique "1" -- "0..*" Album
+  EntiteArtistique "1" -- "0..*" Morceau
+  Album "0..*" -- "0..*" Morceau
+
+  abstract class Utilisateur {
+    -identifiant : String
+    -motDePasse : String
+    -nomAffichage : String
+    -statut : StatutCompte
+  }
+  class Abonne
+  class Administrateur
+  Utilisateur <|-- Abonne
+  Utilisateur <|-- Administrateur
+
+  class Playlist
+  Abonne "1" -- "0..*" Playlist
+  Playlist "0..*" -- "0..*" Morceau
+
+  class AvisMorceau
+  Morceau "1" -- "0..*" AvisMorceau
+
+  class Catalogue
+  Catalogue "1" -- "0..*" EntiteArtistique
+  Catalogue "1" -- "0..*" Album
+  Catalogue "1" -- "0..*" Morceau
+
+  class PlateformeMusicale
+  PlateformeMusicale "1" -- "1" Catalogue
+  PlateformeMusicale "1" -- "0..*" Utilisateur
+}
+@enduml

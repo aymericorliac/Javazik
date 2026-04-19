@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+actor Visiteur
+actor "Abonné" as Abonne
+actor Administrateur as Admin
+
+Abonne --|> Visiteur
+
+rectangle Javazik {
+  usecase "Consulter le catalogue" as UC1
+  usecase "Rechercher un morceau / album / artiste" as UC2
+  usecase "Écouter un morceau" as UC3
+  usecase "Voir détails et navigation" as UC4
+  usecase "Créer / gérer des playlists" as UC5
+  usecase "Consulter l'historique" as UC6
+  usecase "Noter / commenter un morceau" as UC7
+  usecase "Voir recommandations" as UC8
+  usecase "Gérer le catalogue musical" as UC9
+  usecase "Gérer les abonnés" as UC10
+  usecase "Consulter statistiques" as UC11
+  usecase "Recherche avancée" as UC12
+}
+
+Visiteur --> UC1
+Visiteur --> UC2
+Visiteur --> UC3
+Visiteur --> UC4
+Visiteur --> UC12
+Abonne --> UC5
+Abonne --> UC6
+Abonne --> UC7
+Abonne --> UC8
+Admin --> UC9
+Admin --> UC10
+Admin --> UC11
+@enduml
